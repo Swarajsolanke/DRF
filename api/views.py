@@ -17,18 +17,18 @@ def student(request):
 def student(request):
     if request.method=="GET":
         students=Student.objects.all()
-        print(f"queryset:{students.values()}")
+        #print(f"queryset:{students.values()}")
         serializer=StudentSerializer(students,many=True)
-        print(f"serilizer object :{serializer}")
+        #print(f"serilizer object :{serializer}")
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method=="POST":
         serializer=StudentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            print(f"post data: {serializer.data}")
+            #print(f"post data: {serializer.data}")
             return Response(serializer.data,status=status.HTTP_201_CREATED)
-        print(serializer.error)
-        return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
+        #print(serializer.error)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     elif request.method=="PUT":
         return JsonResponse()
     elif request.method=="PATCH":
@@ -38,7 +38,7 @@ def student(request):
     else:
         return HttpResponse()
     
-@api_view(["GET","POST"])   
+@api_view(["GET","POST","PUT","PATCH","DELETE"])   
 def studentdetail(request, pk):
     try:
         student=Student.objects.get(pk=pk)
@@ -53,8 +53,26 @@ def studentdetail(request, pk):
         if serilizer.is_valid():
             serilizer.save()
             return Response(serilizer.data,status=status.HTTP_201_CREATED)
-        return Response(serilizer.error, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+        return Response(serilizer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=="PUT":
+        serilizer=StudentSerializer(student,data=request.data)
+        if serilizer.is_valid():
+            serilizer.save()
+            print(f"serilizer data:{serilizer.data}")
+            return Response(serilizer.data, status=status.HTTP_200_OK)
+        return Response(serilizer.errors,status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=="PATCH":
+        serilize=StudentSerializer(student,data=request.data)
+        if serilize.is_valid():
+            serilize.save()
+            print(f"serilizer data:{serilize.data}")
+            return Response(serilize.data,status=status.HTTP_200_OK)
+        print(serilize.errors)
+        
+        return Response(serilize.error, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=="DELETE":
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
         
 
