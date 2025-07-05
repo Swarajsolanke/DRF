@@ -153,6 +153,7 @@ class Employeedetail(APIView):
 
     """
 
+""""
 # mixins based view 
 
 class Employees(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
@@ -178,3 +179,12 @@ class Employeedetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.De
 
     def delete(self,request,pk):
         return self.destroy(request,pk)
+"""
+#class based view using generics 
+class Employees(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+class Employeedetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employee.objects.filter()
+    serializer_class = EmployeeSerializer
+    lookup_field="pk"  #this is used to get the primary key of the object
