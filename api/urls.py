@@ -18,5 +18,7 @@ urlpatterns=[
 
   # include the router urls 
     path("",include(router.urls)),
+    path("blog/",views.Blogview.as_view()),
+    path("comment/",views.Commentview.as_view()),
 
 ]

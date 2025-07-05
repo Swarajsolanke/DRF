@@ -9,6 +9,8 @@ from employee.models import Employee
 from rest_framework.views import APIView #creating class based view 
 from django.http import Http404
 from rest_framework import mixins ,generics,viewsets
+from blog.models import Blog, Comments
+from blog.serializer import  BlogSerializer,CommentSerializer
 
 
 """# manually serilization of query set 
@@ -238,4 +240,13 @@ class EmployeeViewSet(viewsets.ViewSet):
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset=Employee.objects.all()
     serializer_class=EmployeeSerializer
-    lookup_field="pk"  #this is used to get the primary key of the object
+    lookup_field="pk"       #this is used to get the primary key of the object
+    
+
+#creating views for blog app
+class Blogview(generics.ListCreateAPIView):
+    queryset=Blog.objects.all()
+    serializer_class= BlogSerializer
+class Commentview(generics.ListCreateAPIView):
+    queryset= Comments.objects.all()
+    serializer_class=CommentSerializer
