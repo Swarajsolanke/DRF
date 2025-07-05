@@ -153,7 +153,7 @@ class Employeedetail(APIView):
 
     """
 
-
+# mixins based view 
 
 class Employees(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
     queryset=Employee.objects.all()
@@ -175,6 +175,6 @@ class Employeedetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.De
     def put(self,request,pk):
         return self.update(request,pk)
     
-    
+
     def delete(self,request,pk):
         return self.destroy(request,pk)
