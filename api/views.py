@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from employee.models import Employee
 from rest_framework.views import APIView #creating class based view 
 from django.http import Http404
+from rest_framework import mixins ,generics
 """# manually serilization of query set 
 def student(request):
     student=(Student.objects.all())  #this response is coming in queryset which is not a dict object for json response
@@ -100,7 +101,7 @@ def employee_detail(request):
         pass
 """
 
-#class based view
+"""#class based view
 class Employees(APIView):
     #instance method 
     def get(self,request):
@@ -114,12 +115,12 @@ class Employees(APIView):
             print(f"serilizer object:{serilizer.data}")
             return Response(serilizer.data, status=status.HTTP_201_CREATED)
         return Response(serilizer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
 
-
+""""
 class Employeedetail(APIView):
     def get_object(self, pk):
         try:
-            
             employ=Employee.objects.get(pk=pk)
             return employ
         except Employee.DoesNotExist:
@@ -132,9 +133,11 @@ class Employeedetail(APIView):
         employ=Employee.objects.all()
         serilizer=EmployeeSerializer(employ, many=True)
         return Response(serilizer.data,status=status.HTTP_200_OK)
+    
     def delete(self,request, pk):
          emply=self.get_object(pk)
-         return Response(emply.delete())
+         return Response(emply.delete(),status=status.HTTP_204_NO_CONTENT)
+    
     def put(self,request,pk):
         serilizer=EmployeeSerializer(self.get_object(pk),data=request.data)
         if serilizer.is_valid():
@@ -148,8 +151,30 @@ class Employeedetail(APIView):
             return Response(serilizer.data,status=status.HTTP_201_CREATED)
         return Response(serilizer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    """
+
+
+
+class Employees(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
+    queryset=Employee.objects.all()
+    serializer_class=EmployeeSerializer
+    def get(self,request):
+        print(self.list(request))
+        return self.list(request)
+    def post(self,request):
+        return self.create(request)
+    def put(self,request):
+        return self.update(request)
+ 
+class Employeedetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
+    queryset=Employee.objects.all()
+    serializer_class=EmployeeSerializer
+    def get(self,request,pk):
+        return self.retrieve(request,pk) 
     
-
-
-        
-
+    def put(self,request,pk):
+        return self.update(request,pk)
+    
+    
+    def delete(self,request,pk):
+        return self.destroy(request,pk)
