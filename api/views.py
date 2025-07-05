@@ -196,6 +196,8 @@ class Employeedetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field="pk"  #this is used to get the primary key of the object
 
 """
+
+"""
 #viewset help us to write the single class to handle CURD opeartion 
 class EmployeeViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -230,3 +232,10 @@ class EmployeeViewSet(viewsets.ViewSet):
         employee=get_object_or_404(Employee, pk=pk)
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
+
+# Viewset using ModelViewset
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset=Employee.objects.all()
+    serializer_class=EmployeeSerializer
+    lookup_field="pk"  #this is used to get the primary key of the object
