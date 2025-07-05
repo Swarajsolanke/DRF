@@ -124,15 +124,17 @@ class Employeedetail(APIView):
             return employ
         except Employee.DoesNotExist:
             raise Http404
-    
     def get(self, request, pk):
         employ=self.get_object(pk)
         serilizer=EmployeeSerializer(employ)
         return Response(serilizer.data,status=status.HTTP_200_OK)
-    def get_all(self, request):
+    def get(self, request):
         employ=Employee.objects.all()
         serilizer=EmployeeSerializer(employ, many=True)
         return Response(serilizer.data,status=status.HTTP_200_OK)
+    def delete(self,request, pk):
+         emply=self.get_object(pk)
+         return Response(emply.delete())
     def put(self,request,pk):
         serilizer=EmployeeSerializer(self.get_object(pk),data=request.data)
         if serilizer.is_valid():
@@ -140,7 +142,7 @@ class Employeedetail(APIView):
             return Response(serilizer.data, status=status.HTTP_200_OK)
         return Response(serilizer.errors, status=status.HTTP_400_BAD_REQUEST)
     def post(self,request):
-        serilizer=EmployeeSerializer(data=self.data.request)
+        serilizer=EmployeeSerializer(data=request.data)
         if serilizer.is_valid():
             serilizer.save()
             return Response(serilizer.data,status=status.HTTP_201_CREATED)
