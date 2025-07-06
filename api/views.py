@@ -11,7 +11,7 @@ from django.http import Http404
 from rest_framework import mixins ,generics,viewsets
 from blog.models import Blog, Comments
 from blog.serializer import  BlogSerializer,CommentSerializer
-
+from api.paginations import CustomePagination
 
 """# manually serilization of query set 
 def student(request):
@@ -241,7 +241,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset=Employee.objects.all()
     serializer_class=EmployeeSerializer
     lookup_field="pk"       #this is used to get the primary key of the object
-    
+    pagination_class=CustomePagination
 
 #creating views for blog app
 class Blogview(generics.ListCreateAPIView):
