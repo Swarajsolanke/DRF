@@ -21,28 +21,10 @@ This repository is a **learning-focused** implementation of the Django REST Fram
 
 ---
 
-## 🏗️ Project Structure
-----
-├── api/
-│   ├── views/               # FBV, CBV, Mixins, Generic Views
-│   ├── viewsets/            # ViewSet & ModelViewSet logic
-│   ├── serializers.py       # All serializers
-│   ├── models.py            # Django models
-│   ├── filters.py           # Filtering logic
-│   ├── urls.py              # App routes
-│
-├── django_rest/
-│   ├── settings.py          # Main settings
-│   ├── urls.py              # Project-level routing
-│
-├── manage.py
-└── README.md
 
----
-🧪 Features Breakdown
-   
-   
-   
+
+## 🧪 Features Breakdown
+  
 | Feature                         |  Description
                                               
 ---------------------------------------------------
@@ -55,29 +37,23 @@ This repository is a **learning-focused** implementation of the Django REST Fram
 -----------------------------------------------------------------
 
 
-🔧 Setup Instructions
+## 🔧 Setup Instructions
 ---
 1️⃣ Clone the Repository
-
 git clone https://github.com/Swarajsolanke/DRF.git
 cd DR
-
----
-
 2️⃣ Create Virtual Environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-
 3️⃣ Install Requirements
 pip install -r requirements.txt
-
 4️⃣ Run the Server
 python manage.py migrate
 python manage.py runserver
 
 ---
 
-📌 Pagination Types
+## 📌 Pagination Types
 1.PageNumberPagination
 
 2.LimitOffsetPagination
@@ -86,7 +62,7 @@ python manage.py runserver
 
 ----
 
-🔍 Filtering & Searching
+## 🔍 Filtering & Searching
 
 mplemented using:
 
@@ -97,7 +73,7 @@ mplemented using:
 3.OrderingFilter to sort by fields.
 
 ----
-🧰 Tech Stack
+## 🧰 Tech Stack
 
 🐍 Python 3.10+
 
@@ -107,11 +83,10 @@ mplemented using:
 
 🔎 django-filter
 
----
 
-🛠 SQLite (Default DB)
 
-📚 Learning Goals
+
+## 📚 Learning Goals
 This repository was created for educational purposes to:
 
 Understand different DRF view types.
