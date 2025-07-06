@@ -18,7 +18,12 @@ urlpatterns=[
 
   # include the router urls 
     path("",include(router.urls)),
+
+  #class based url
     path("blog/",views.Blogview.as_view()),
     path("comment/",views.Commentview.as_view()),
+  #based on primary key 
+  path("blog/<int:pk>/", views.Blogdetailview.as_view()),
+  path("comment/<int:pk>/",views.Commentdetailview.as_view()),
 
 ]

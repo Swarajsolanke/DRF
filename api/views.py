@@ -247,6 +247,18 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class Blogview(generics.ListCreateAPIView):
     queryset=Blog.objects.all()
     serializer_class= BlogSerializer
+   
 class Commentview(generics.ListCreateAPIView):
     queryset= Comments.objects.all()
     serializer_class=CommentSerializer
+
+
+#create the class of blog detail and comment details view based on primary key
+class Blogdetailview(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Blog.objects.all()
+    serializer_class= BlogSerializer
+    lookup_field="pk"
+class Commentdetailview(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Comments.objects.all()
+    serializer_class=CommentSerializer
+    lookup_field="pk"
