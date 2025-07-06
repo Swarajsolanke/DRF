@@ -37,11 +37,14 @@ This repository is a **learning-focused** implementation of the Django REST Fram
 1️⃣ Clone the Repository
 git clone https://github.com/Swarajsolanke/DRF.git
 cd DR
+
 2️⃣ Create Virtual Environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 3️⃣ Install Requirements
 pip install -r requirements.txt
+
 4️⃣ Run the Server
 python manage.py migrate
 python manage.py runserver
@@ -49,23 +52,22 @@ python manage.py runserver
 
 
 ## 📌 Pagination Types
-1.PageNumberPagination
+ 1.PageNumberPagination
 
-2.LimitOffsetPagination
+ 2.LimitOffsetPagination
 
-3.CustomPagination
+ 3.CustomPagination
 
 
 
 ## 🔍 Filtering & Searching
 
-mplemented using:
+ ### implemented using:
+ 1.django-filter for query param-based filtering.
 
-1.django-filter for query param-based filtering.
+ 2.SearchFilter for full-text search.
 
-2.SearchFilter for full-text search.
-
-3.OrderingFilter to sort by fields.
+ 3.OrderingFilter to sort by fields.
 
 ## 🧰 Tech Stack
 
