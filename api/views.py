@@ -13,6 +13,7 @@ from blog.models import Blog, Comments
 from blog.serializer import  BlogSerializer,CommentSerializer
 from api.paginations import CustomePagination
 from employee.filters import EmployeeFilter
+from rest_framework.filters import SearchFilter
 """# manually serilization of query set 
 def student(request):
     student=(Student.objects.all())  #this response is coming in queryset which is not a dict object for json response
@@ -249,6 +250,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class Blogview(generics.ListCreateAPIView):
     queryset=Blog.objects.all()
     serializer_class= BlogSerializer
+    filter_backends=[SearchFilter]   #applied search filter 
+    search_fields=['blog_title','blog_body']
+   
    
 class Commentview(generics.ListCreateAPIView):
     queryset= Comments.objects.all()
