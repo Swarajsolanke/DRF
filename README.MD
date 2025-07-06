@@ -22,9 +22,7 @@ This repository is a **learning-focused** implementation of the Django REST Fram
 ---
 
 ## 🏗️ Project Structure
-
-```bash
-.
+----
 ├── api/
 │   ├── views/               # FBV, CBV, Mixins, Generic Views
 │   ├── viewsets/            # ViewSet & ModelViewSet logic
