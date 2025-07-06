@@ -242,6 +242,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     serializer_class=EmployeeSerializer
     lookup_field="pk"       #this is used to get the primary key of the object
     pagination_class=CustomePagination
+    filterset_fields =['emp_id']  #filtering based on name and designation
 
 #creating views for blog app
 class Blogview(generics.ListCreateAPIView):
